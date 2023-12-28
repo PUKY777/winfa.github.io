@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <td><button><a href="../index.html">Winfa</a></button></td>
+
+    <title>Tu Mapa</title>
+
+    <!-- Agrega la API de Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgrRITrhfXPI_-pj4PVvyQ9_7AZn1cpHE&libraries=places"></script>
+
+    <!-- Estilos personalizados si es necesario -->
+    <style>
+        #map {
+            height: 600px;
+        }
+
+        .social-table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        .social-table td {
+            padding: 5px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .social-table img {
+            width: 30px; /* Ajusta el ancho de las imágenes según sea necesario */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Contenido principal de tu página -->
+    <div id="map"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var map;
+            var infowindow;
+
+            function initMap() {
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: -19.04469, lng: -65.25911 }, // Centro en Sucre, Chuquisaca, Bolivia
+                    zoom: 16
+                });
+
+                infowindow = new google.maps.InfoWindow();
+
+                // Resto del código para agregar marcadores y grupos de capas
+                // ...
+
+                // Ejemplo de marcador:
+                var marker = new google.maps.Marker({
+                    position: { lat: -19.0393989, lng: -65.2679384 },
+                    map: map,
+                    title: 'Cerveza Sureña'
+                });
+
+                // Ejemplo de información del marcador
+                var contentString = '<div id="content">' +
+                    '<h3>Cerveza Sureña</h3>' +
+                    '<p>Horario: Lunes a Viernes 08:00 - 12:00 / 14:00 - 18:00</p>' +
+                    '<p>Dirección: Calle Mauro Nuñez # 16</p>' +
+                    '<p>Origen: Sucre - Chuquisaca - Bolivia</p>' +
+                    '<img src="Edificios/edificio sureña.jpg" alt="Foto del marcador" style="width: 100%; max-width: 200px; margin-top: 5px;">' +
+                    '<table class="social-table"><tr>' +
+                    '<td><a href="https://www.facebook.com/SurenaCerveza" target="_blank"><img src="facebook.png" alt="Facebook"></a></td>' +
+                    '<td><a href="https://wa.me/59176123407" target="_blank"><img src="whatsapp.png" alt="WhatsApp"></a></td>' +
+                    '<td><a href="https://www.surena.com" target="_blank"><img src="pagina.png" alt="Sitio Web"></a></td>' +
+                    '</tr></table>' +
+                    '</div>';
+
+                marker.addListener('click', function () {
+                    infowindow.setContent(contentString);
+                    infowindow.open(map, marker);
+                });
+            }
+
+            // Llama a la función initMap una vez que se ha cargado la API de Google Maps
+            google.maps.event.addDomListener(window, 'load', initMap);
+        });
+    </script>
+
+</body>
+</html>

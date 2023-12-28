@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Mapa</title>
+
+    <!-- Agrega Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- Estilos personalizados si es necesario -->
+    <style>
+        #map {
+            height: 500px;
+        }
+
+        .social-table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        .social-table td {
+            padding: 5px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .social-table img {
+            width: 30px; /* Ajusta el ancho de las imágenes según sea necesario */
+            height: auto;
+        }
+
+        #popup-photo,
+        #popup-video {
+            width: 100%;
+            max-width: 200px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenido principal de tu página -->
+
+    <div id="map"></div>
+
+    <!-- Agrega Leaflet JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var map = L.map('map'); // No especificamos la ubicación inicial
+
+            // Usa la geolocalización HTML5 para obtener la posición del usuario
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    var userLocation = [position.coords.latitude, position.coords.longitude];
+
+                    // Agrega capa de OpenStreetMap al mapa
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© OpenStreetMap contributors'
+                    }).addTo(map);
+
+                    // Grupos de capas
+                    var grupos = {
+                        Primario: L.layerGroup(),
+                        Secundario: L.layerGroup(),
+                        Terciario: L.layerGroup()
+                    };
+
+                    // Datos de marcadores (reemplaza estos datos con los tuyos)
+                    var marcadores = {
+                        Primario: [
+                            {
+                                latitud: -19.0210913,
+                                longitud: -65.2828561,
+                                sigla: "SENASAG",
+                                nombre: "Servicio Nacional de Sanidad Agropecuaria e Inocuidad Alimentaria",
+                                horario: "Lunes a Viernes 08:00 - 12:00 / 14:00 - 18:00",
+                                direccion: "Dirección del lugar",
+                                origen: "Sucre - Chuquisaca - Bolivia",
+                                facebook: "https://www.facebook.com/BoliviaSenasag",
+                                whatsapp: "https://wa.me/59174434568",
+                                tiktok: "https://www.tiktok.com/@senasag_bolivia",
+                                sitioWeb: "http://www.senasag.gob.bo",
+                                correo: "https://correo.senasag.gob.bo",
+                                foto: "https://ejemplo.com/foto1.jpg",
+                                video: "https://ejemplo.com/video1.mp4"
+                            },
+                            // Agrega más marcadores Primarios según sea necesario
+                        ],
+                        Secundario: [
+                            {
+                                latitud: -19.0468796,
+                                longitud: -65.2563334,
+                                sigla: "I.N.",
+                                nombre: "Impuestos nacionales",
+                                horario: "Horario del lugar",
+                                direccion: "Dirección del lugar",
+                                origen: "Origen del lugar",
+                                facebook: "https://www.facebook.com/ejemplo2",
+                                whatsapp: "https://wa.me/1234567892",
+                                tiktok: "https://www.tiktok.com/@usuario2",
+                                foto: "https://ejemplo.com/foto2.jpg",
+                                video: "https://ejemplo.com/video2.mp4"
+                            },
+                            // Agrega más marcadores Secundarios según sea necesario
+                        ],
+                        Terciario: [
+                            // Agrega más marcadores Terciarios según sea necesario
+                        ]
+                    };
+
+                    // Función para mostrar la foto en el pop-up
+                    function showPhoto(photoUrl) {
+                        var photoContainer = document.getElementById('popup-photo');
+                        photoContainer.src = photoUrl;
+                        photoContainer.style.display = 'block';
+
+                        // Oculta el vídeo si está visible
+                        var videoContainer = document.getElementById('popup-video');
+                        videoContainer.style.display = 'none';
+                    }
+
+                    // Función para mostrar el vídeo en el pop-up
+                    function showVideo(videoUrl) {
+                        var videoContainer = document.getElementById('popup-video');
+                        videoContainer.src = videoUrl;
+                        videoContainer.style.display = 'block';
+
+                        // Oculta la foto si está visible
+                        var photoContainer = document.getElementById('popup-photo');
+                        photoContainer.style.display = 'none';
+                    }
+
+                    // Agrega marcadores a los grupos de capas
+                    Object.keys(grupos).forEach(grupo => {
+                        marcadores[grupo].forEach(marcador => {
+                            var socialTableContent = `
+                                <table class="social-table">
+                                    <tr>
+                                        <td><a href="${marcador.facebook}" target="_blank"><img src="facebook_logo.png" alt="Facebook"></a></td>
+                                        <td><a href="${marcador.whatsapp}" target="_blank"><img src="whatsapp_logo.png" alt="WhatsApp"></a></td>
+                                        <td><a href="${marcador.tiktok}" target="_blank"><img src="tiktok_logo.png" alt="TikTok"></a></td>
+                                        <td><a href="${marcador.sitioWeb}" target="_blank"><img src="sitio_web_logo.png" alt="Sitio Web"></a></td>
+                                        <td><a href="${marcador.correo}" target="_blank"><img src="correo_logo.png" alt="Correo"></a></td>
+                                    </tr>
+                                </table>
+                            `;
+
+                            var popupContent = `
+                                <h3>${marcador.sigla}</h3>
+                                <p>${marcador.nombre}</p>
+                                <p><strong>Horario:</strong> ${marcador.horario}</p>
+                                <p><strong>Dirección:</strong> ${marcador.direccion}</p>
+                                <p><strong>Origen:</strong> ${marcador.origen}</p>
+                                <img id="popup-photo" src="${marcador.foto}" alt="Foto del marcador">
+                                <video id="popup-video" width="100%" controls>
+                                    <source src="${marcador.video}" type="video/mp4">
+                                    Tu navegador no soporta el tag de video.
+                                </video>
+                                <button onclick="showPhoto('${marcador.foto}')">Mostrar Foto</button>
+                                <button onclick="showVideo('${marcador.video}')">Mostrar Video</button>
+                                ${socialTableContent}
+                            `;
+
+                            var marcadorLayer = L.marker([marcador.latitud, marcador.longitud])
+                                .bindPopup(popupContent);
+
+                            grupos[grupo].addLayer(marcadorLayer);
+                        });
+                    });
+
+                    // Añade los grupos de capas al mapa
+                    Object.keys(grupos).forEach(grupo => {
+                        map.addLayer(grupos[grupo]);
+                    });
+
+                    // Añade control de capas al mapa
+                    L.control.layers(null, grupos, { collapsed: false }).addTo(map);
+
+                    // Ajusta el zoom y centra el mapa en la ubicación del usuario
+                    map.setView(userLocation, 16);
+                });
+            } else {
+                // Si el navegador no soporta geolocalización, establece una ubicación predeterminada
+                map.setView([0, 0], 2);
+                // Agrega capa de OpenStreetMap al mapa
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors'
+                }).addTo(map);
+
+                // Resto del código para agregar marcadores y grupos de capas
+                // ...
+            }
+        });
+    </script>
+</body>
+</html>

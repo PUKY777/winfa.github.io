@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <td><button><a href="../index.html">Winfa</a></button></td>
+    
+    <title>Emprendimientos</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 0.5px solid #ddd;
+            padding: 0.5px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            position: sticky;
+            top: 0;
+        }
+
+        img {
+            max-width: 50px;
+            max-height: 50px;
+        }
+
+        button {
+            padding: 8px;
+            margin: 5px;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="Buscar por nombre, Productos/Servicios, Origen...">
+
+    <table id="emprendimientosTable">
+        <tr>
+            <th>Logo</th>
+            <th>Nombre</th>
+            <th>Productos/Servicios</th>
+            <th>Origen</th>
+            <th>Ubicación</th>
+        </tr>
+        <!-- Row 1 -->
+        <tr>
+            <td><img src="/entidades/logos/FEPCH.png" alt="Logo Empresa 1"></td>
+            <td>Federacion de Empresarios Privados de Chuquisaca</td>
+            <td></td>
+            <td>Dirección 1</td>
+            <td><button onclick="openLocation('1.23456,-3.45678')">Ver Mapa</button></td>
+        </tr>
+        <!-- Row 2 -->
+        <tr>
+            <td><img src="/entidades/logos/CAINCO.png" alt="Logo Empresa 2"></td>
+            <td>Camara de Industria y Comercio, Servicio y Turismo Chuquisaca</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="/entidades/logos/SIB.png" alt="Logo Empresa 3"></td>
+            <td>Sociedad de Ingenieros de Bolivia</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="/entidades/logos/usfx.png" alt="Logo Empresa 4"></td>
+            <td>Universidad San Francisco de Xavier</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="/entidades/logos/SENASAG.png" alt="Logo Empresa 5"></td>
+            <td>Servicio Nacional de Sanidad Agropecuaria e Inocuidad Alimentaria</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="/entidades/logos/FEXPO.png" alt="Logo Empresa 6"></td>
+            <td>Fundacion Fexpo</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="/entidades/logos/CACH.png" alt="Logo Empresa 7"></td>
+            <td>Colegio de Arquitectos de Chuquisaca</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="/entidades/logos/CEPI.png" alt="Logo Empresa 8"></td>
+            <td>Centro de Estudio de Posgrado e Investigacion</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="/entidades/logos/EMAS.png" alt="Logo Empresa 9"></td>
+            <td>Entidad Municipal de Aseo Urbano Sucre</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="/entidades/logos/PJV.png" alt="Logo Empresa 10"></td>
+            <td>Pastoral Juvenil Vocacional</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="/entidades/logos/GADCH.png" alt="Logo Empresa 2"></td>
+            <td>Gobierno Autonomo Departamental de Chuquisaca</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="/entidades/logos/IN.png" alt="Logo Empresa 2"></td>
+            <td>Impuestos Nacionales</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-19.0468796,-65.2563334')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="SEDES.png" alt="Logo Empresa 2"></td>
+            <td>Servicio Departamental de Salud de Chuquisaca</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="SEGIP.png" alt="Logo Empresa 2"></td>
+            <td>Servicio General de Identificacion Personal</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="SENAPI.png" alt="Logo Empresa 2"></td>
+            <td>Servicio Nacional de Propiedad Intelectual</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Cementerio General</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Tribunal Supremo de Justicia de Bolivia</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Tribunl Supremo de Justicia de Chuquisaca</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Terminal de Buses Sucre</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Terminal Interprovincial Sucre</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Aeropuerto Internacional de Alcantari</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Casa de la Libertad</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Museo de la Catedral</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Museo Santa Clara</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Museo de la Recoleta</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Museo Santa Teresa</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Museo San Francisco</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Templo de San Lazaro</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Museo ASUR</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Museo del Pan</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Museo del Chocolates Para Ti</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Palacio de la Florida</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Palacete del Guereo</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Parque Cretacico</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Archivo de la Educacion Boliviana</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Museo Militar Mariscal Antonio Jose de Sucre</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Castillo de la Glorieta</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Cetur</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Museo Moises Cruz Infante</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Museo El Patronato</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Museo Antropologico de Cinti - Cruz Huasa</td>
+            <td>Historia</td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Hacienda y Bodega San Pedro</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Hacienda La Palca Chica</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Sucre</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de San Lucas</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Monteagudo</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Culpina</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Poroma</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Tarabuco</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Villa Charcas</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Camargo</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Tarvita</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Incahuasi</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Presto</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Zudañez</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Villa Serrano</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Azurduy</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Padilla</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Yamparaez</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Villa Vaca Guzman</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Yotala</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Tomina</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Huacareta</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Mojocoya</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Icla</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Machareti</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Sopachuy</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Villa Alcala</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio El Villar</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio Las Carreras</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Villa Abecia</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        <tr>
+            <td><img src="logo.png" alt="Logo Empresa 2"></td>
+            <td>Municipio de Huacaya</td>
+            <td></td>
+            <td>Dirección 2</td>
+            <td><button onclick="openLocation('-0.12345,2.34567')">Ver Mapa</button></td>
+        </tr>
+        
+        <!-- More rows... -->
+    </table>
+
+    <script>
+        function openCatalog(catalogUrl) {
+            // Implement catalog opening logic
+        }
+
+        function showInfo(infoId) {
+            // Implement displaying more information logic
+        }
+
+        function openWhatsApp(number) {
+            // Implement opening WhatsApp chat logic
+        }
+
+        function openLocation(lat, lng) {
+        // Redirect to the map page with coordinates as query parameters
+        window.location.href = `../mapa/map%20winfa.html?lat=${lat}&lng=${lng}`;
+    }
+
+    function searchTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("emprendimientosTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                // Selecciona las celdas de las columnas "Nombre", "Productos/Servicios" y "Origen"
+                tdNombre = tr[i].getElementsByTagName("td")[1];
+                tdProductos = tr[i].getElementsByTagName("td")[2];
+                tdOrigen = tr[i].getElementsByTagName("td")[3];
+
+                if (tdNombre || tdProductos || tdOrigen) {
+                    // Concatena el texto de las celdas seleccionadas
+                    txtValue = (tdNombre ? tdNombre.textContent || tdNombre.innerText : '') +
+                               (tdProductos ? tdProductos.textContent || tdProductos.innerText : '') +
+                               (tdOrigen ? tdOrigen.textContent || tdOrigen.innerText : '');
+
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+<footer style="text-align: center; background-color: #333; color: #fff; padding: 10px;">
+    &copy; 2023 WINFA. Todos los derechos reservados.
+</footer>
+
+</body>
+</html>
