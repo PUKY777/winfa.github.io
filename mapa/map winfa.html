@@ -6,15 +6,11 @@
 
     <td><button><a href="../index.html">Winfa</a></button></td>
 
-    <title>Tu Mapa</title>
-
-    <!-- Agrega Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
-    <!-- Estilos personalizados si es necesario -->
+    <title>WINFA</title>
+    
     <style>
         #map {
-            height: 600px;
+            height: 680px; /* Establece la altura del elemento con id "map" a 580 píxeles */
         }
 
         .social-table {
@@ -24,7 +20,7 @@
         }
 
         .social-table td {
-            padding: 5px;
+            padding: 0.5px;
             border: 1px solid #ddd;
             text-align: center;
         }
@@ -32,8 +28,64 @@
         .social-table img {
             width: 30px; /* Ajusta el ancho de las imágenes según sea necesario */
             height: auto;
+            margin: 0;   /* Quita los márgenes superior e inferior de la imagen */
+        }
+
+        .horario-dropdown {
+            display: none;
+            margin-top: 0;  /* Quita el margen superior */
+            margin-bottom: 0;  /* Quita el margen inferior */
+        }
+
+        .horario-button {
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 2px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .horario-toggle {
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 2px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        #compartirEnlaceBtn {
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 3px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 1px;
+            border-radius: 5px;
         }
     </style>
+
+    <!-- Agrega Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
     
@@ -46,6 +98,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var map = L.map('map'); // No especificamos la ubicación inicial
+            var userMarker; // Marcador de la ubicación del usuario
 
             // Usa la geolocalización HTML5 para obtener la posición del usuario
             if (navigator.geolocation) {
@@ -57,6 +110,12 @@
                         attribution: '© OpenStreetMap contributors'
                     }).addTo(map);
 
+                    // Agrega marcador de ubicación del usuario
+                    userMarker = L.marker(userLocation, { draggable: true })
+                        .addTo(map)
+                        .bindPopup("Tu ubicación actual")
+                        .openPopup();
+
                     // Grupos de capas
                     var grupos = {
                         Agricultura: L.layerGroup(),
@@ -66,27 +125,30 @@
 
                     // Datos de marcadores (reemplaza estos datos con los tuyos)
                     var marcadores = {
-                        Agricultura: [
-                            
-                            // Otros marcadores...
-                        ],
+                        Agricultura: [],
                         Manufactura: [
                             {
                                 latitud: -19.0393989, 
                                 longitud: -65.2679384,
                                 sigla: "SUREÑA",
                                 nombre: "Cerveza Sureña",
-                                horario: "Lunes a Viernes 08:00 - 12:00 / 14:00 - 18:00",
+                                horario: {
+                                    Lunes: "08:00 - 12:00 / 14:00 - 18:00",
+                                    Martes: "08:00 - 12:00 / 14:00 - 18:00",
+                                    Miércoles: "08:00 - 12:00 / 14:00 - 18:00",
+                                    Jueves: "08:00 - 12:00 / 14:00 - 18:00",
+                                    Viernes: "08:00 - 12:00 / 14:00 - 18:00",
+                                    Sábado: "08:00 - 12:00 / 14:00 - 18:00"
+                                },
                                 direccion: "Calle Mauro Nuñez # 16",
                                 origen: "Sucre - Chuquisaca - Bolivia",
                                 facebook: "https://www.facebook.com/SurenaCerveza",
                                 whatsapp: "https://wa.me/59176123407",
-                                tiktok: null, // No tiene TikTok
-                                sitioWeb: "https://www.surena.com", // Tiene un sitio web
-                                correo: null, // No tiene correo
+                                tiktok: null,
+                                sitioWeb: "https://www.surena.com",
+                                correo: null,
                                 foto: "Edificios/edificio sureña.jpg"
                             },
-                            // Otros marcadores...
                         ],
                         Servicios: [
                             {
@@ -94,32 +156,23 @@
                                 longitud: -65.2548899,
                                 sigla: "EMAPA",
                                 nombre: "",
-                                horario: "Lunes a Viernes 08:00 - 12:00 / 14:00 - 18:00",
+                                horario: {
+                                    Lunes: "08:00 - 12:00 / 14:00 - 18:00",
+                                    Martes: "08:00 - 12:00 / 14:00 - 18:00",
+                                    Miércoles: "08:00 - 12:00 / 14:00 - 18:00",
+                                    Jueves: "08:00 - 12:00 / 14:00 - 18:00",
+                                    Viernes: "08:00 - 12:00 / 14:00 - 18:00",
+                                    Sábado: "08:00 - 12:00 / 14:00 - 18:00"
+                                },
                                 direccion: "Calle Avaroa # 64",
                                 origen: "Sucre - Chuquisaca - Bolivia",
                                 facebook: null,
                                 whatsapp: null,
-                                tiktok: null, // No tiene TikTok
+                                tiktok: null,
                                 sitioWeb: null,
-                                correo: null, // No tiene correo
+                                correo: null,
                                 foto: "Edificios/edificio emapa.jpg"
                             },
-                            {
-                                latitud: -18.9481920, 
-                                longitud: -65.122101,
-                                sigla: "PARQUE RECREACIONAL ERMITA",
-                                nombre: "ERMITA",
-                                horario: "Lunes a Viernes 08:00 - 12:00 / 14:00 - 18:00",
-                                direccion: "SALID A CBBA",
-                                origen: "Sucre - Chuquisaca - Bolivia",
-                                facebook: null,
-                                whatsapp: null,
-                                tiktok: null, // No tiene TikTok
-                                sitioWeb: null,
-                                correo: null, // No tiene correo
-                                foto: "Edificios/edificio emapa.jpg"
-                            },
-                            // Otros marcadores...
                         ]
                     };
 
@@ -145,19 +198,30 @@
                             }
                             socialTableContent += `</tr></table>`;
 
+                            // Genera el contenido del horario desplegable como botón
+                            var horarioDropdownContent = '<div class="horario-dropdown">';
+                            Object.keys(marcador.horario).forEach(dia => {
+                                horarioDropdownContent += `<button class="horario-button">${dia}: ${marcador.horario[dia]}</button>`;
+                            });
+                            horarioDropdownContent += '</div>';
+
                             var popupContent = `
                                 <div style="max-width: 300px;">
                                     <h3 style="margin: 0;">${marcador.sigla}</h3>
                                     <p style="margin: 5px 0 0;">${marcador.nombre}</p>
-                                    <p style="margin: 0;"><strong>Horario:</strong> ${marcador.horario}</p>
+                                    <div class="horario-toggle" onclick="toggleHorario(this)">Horario</div>
+                                    ${horarioDropdownContent}
                                     <p style="margin: 0;"><strong>Dirección:</strong> ${marcador.direccion}</p>
                                     <p style="margin: 0;"><strong>Origen:</strong> ${marcador.origen}</p>
                                     <img src="${marcador.foto}" alt="Foto del marcador" style="width: 100%; max-width: 200px; margin-top: 5px;">
                                     ${socialTableContent}
+                                    
+                                    <!-- Botón de compartir enlace -->
+                                    <button id="compartirEnlaceBtn" onclick="compartirEnlace('${marcador.sigla}', ${marcador.latitud}, ${marcador.longitud})">Compartir Enlace</button>
                                 </div>
                             `;
 
-                            var marcadorLayer = L.marker([marcador.latitud, marcador.longitud])
+                            var marcadorLayer = L.marker([marcador.latitud, marcador.longitud], { title: marcador.sigla })
                                 .bindPopup(popupContent);
 
                             grupos[grupo].addLayer(marcadorLayer);
@@ -169,11 +233,27 @@
                         map.addLayer(grupos[grupo]);
                     });
 
-                    // Agrega control de capas al mapa
+                    // Añade el control de capas al mapa
                     L.control.layers(null, grupos, { collapsed: false }).addTo(map);
 
                     // Ajusta el zoom y centra el mapa en la ubicación del usuario
                     map.setView(userLocation, 16);
+
+                    // Evento de arrastre del marcador de usuario para actualizar la distancia
+                    userMarker.on('drag', function (event) {
+                        actualizarDistancias();
+                    });
+
+                    // Función para actualizar las distancias
+                    function actualizarDistancias() {
+                        Object.keys(grupos).forEach(grupo => {
+                            grupos[grupo].eachLayer(function (m) {
+                                var distancia = userMarker.getLatLng().distanceTo(m.getLatLng());
+                                document.getElementById('distancia-' + m.options.title).innerText = `Distancia: ${distancia.toFixed(2)} metros`;
+                            });
+                        });
+                    };
+
                 });
             } else {
                 // Si el navegador no soporta geolocalización, establece una ubicación predeterminada
@@ -187,7 +267,20 @@
                 // ...
             }
         });
-    </script>
 
+        // Función para compartir enlace
+        function compartirEnlace(sigla, latitud, longitud) {
+            var enlace = window.location.origin + window.location.pathname + '?marker=' + sigla + '&lat=' + latitud + '&lng=' + longitud;
+            alert('¡Enlace copiado al portapapeles!\n\n' + enlace);
+            // Puedes personalizar esta función para copiar el enlace al portapapeles o abrir una ventana de compartir, según tus necesidades.
+            // Para copiar al portapapeles, puedes utilizar el API de Clipboard (document.execCommand o Clipboard API) o bibliotecas como Clipboard.js.
+        }
+
+        // Función para alternar la visibilidad del horario
+        function toggleHorario(element) {
+            var horarioDropdown = element.nextElementSibling;
+            horarioDropdown.style.display = horarioDropdown.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
 </body>
 </html>
