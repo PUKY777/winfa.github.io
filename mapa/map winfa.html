@@ -5,17 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <td><button><a href="../index.html">Winfa</a></button></td>
+    <button id="ubicacionActualBtn" onclick="obtenerUbicacionActual()"></button>
 
-    <title>WINFA</title>
+    <title>Tu Mapa</title>
     
     <style>
         #map {
-            height: 700px; /* Establece la altura del elemento con id "map" a 580 píxeles */
+            height: 700px;
+        }
+
+        .nueva-tabla {
+            width: 100%;
+            margin-top: 0.5px;
+            border-collapse: collapse;
+        }
+
+        .nueva-tabla td {
+            padding: 0.5px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .nueva-tabla img {
+            width: 30px;
+            height: auto;
+            margin: 0;
         }
 
         .social-table {
             width: 100%;
-            margin-top: 10px;
+            margin-top: 0.5px;
             border-collapse: collapse;
         }
 
@@ -26,15 +45,15 @@
         }
 
         .social-table img {
-            width: 30px; /* Ajusta el ancho de las imágenes según sea necesario */
+            width: 30px;
             height: auto;
-            margin: 0;   /* Quita los márgenes superior e inferior de la imagen */
+            margin: 0;
         }
 
         .horario-dropdown {
             display: none;
-            margin-top: 0;  /* Quita el margen superior */
-            margin-bottom: 0;  /* Quita el margen inferior */
+            margin-top: 0;
+            margin-bottom: 0;
         }
 
         .horario-button {
@@ -79,42 +98,42 @@
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin-top: 1px;
+            margin-top: 10px;
             border-radius: 5px;
         }
+
+
     </style>
 
     <!-- Agrega Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
+
 <body>
-    
+
     <!-- Contenido principal de tu página -->
     <div id="map"></div>
-
+    
     <!-- Agrega Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var map = L.map('map'); // No especificamos la ubicación inicial
-            var userMarker; // Marcador de la ubicación del usuario
+            var map = L.map('map');
+            var userMarker;
 
-            // Usa la geolocalización HTML5 para obtener la posición del usuario
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     var userLocation = [position.coords.latitude, position.coords.longitude];
 
-                    // Agrega capa de OpenStreetMap al mapa
                     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                         attribution: '© OpenStreetMap contributors'
                     }).addTo(map);
 
-                    // Agrega marcador de ubicación del usuario
                     userMarker = L.marker(userLocation, { draggable: true })
-                        .addTo(map)
-                        .bindPopup("Tu ubicación actual")
-                        .openPopup();
+                    .addTo(map)
+                    .bindPopup("Tu ubicación actual")
+                    .openPopup();
 
                     // Grupos de capas
                     var grupos = {
@@ -122,60 +141,43 @@
                         Manufactura: L.layerGroup(),
                         Servicios: L.layerGroup()
                     };
-
+                    
                     // Datos de marcadores (reemplaza estos datos con los tuyos)
                     var marcadores = {
                         Agricultura: [],
-                        Manufactura: [
-                            {
-                                latitud: -19.0393989, 
-                                longitud: -65.2679384,
-                                sigla: "SUREÑA",
-                                nombre: "Cerveza Sureña",
-                                horario: {
-                                    Lunes: "08:00 - 12:00 / 14:00 - 18:00",
-                                    Martes: "08:00 - 12:00 / 14:00 - 18:00",
-                                    Miércoles: "08:00 - 12:00 / 14:00 - 18:00",
-                                    Jueves: "08:00 - 12:00 / 14:00 - 18:00",
-                                    Viernes: "08:00 - 12:00 / 14:00 - 18:00",
-                                    Sábado: "08:00 - 12:00 / 14:00 - 18:00"
-                                },
-                                direccion: "Calle Mauro Nuñez # 16",
-                                origen: "Sucre - Chuquisaca - Bolivia",
-                                facebook: "https://www.facebook.com/SurenaCerveza",
-                                whatsapp: "https://wa.me/59176123407",
-                                tiktok: null,
-                                sitioWeb: "https://www.surena.com",
-                                correo: null,
-                                foto: "Edificios/edificio sureña.jpg"
-                            },
-                        ],
+                        Manufactura: [],
                         Servicios: [
                             {
-                                latitud: -19.0471409, 
-                                longitud: -65.2548899,
-                                sigla: "EMAPA",
+                                latitud: -19.047577,
+                                longitud: -65.260211,
+                                sigla: "Casa de la Libertad",
                                 nombre: "",
                                 horario: {
-                                    Lunes: "08:00 - 12:00 / 14:00 - 18:00",
-                                    Martes: "08:00 - 12:00 / 14:00 - 18:00",
-                                    Miércoles: "08:00 - 12:00 / 14:00 - 18:00",
-                                    Jueves: "08:00 - 12:00 / 14:00 - 18:00",
-                                    Viernes: "08:00 - 12:00 / 14:00 - 18:00",
-                                    Sábado: "08:00 - 12:00 / 14:00 - 18:00"
+                                    Lunes: "00:00 - 24:00",
+                                    Martes: "00:00 - 24:00",
+                                    Miércoles: "00:00 - 24:00",
+                                    Jueves: "00:00 - 24:00",
+                                    Viernes: "00:00 - 24:00",
+                                    Sabado: "00:00 - 24:00",
+                                    Domingo: "00:00 - 24:00"
                                 },
-                                direccion: "Calle Avaroa # 64",
+                                direccion: "Calle: Plaza 25 de Mayo",
                                 origen: "Sucre - Chuquisaca - Bolivia",
                                 facebook: null,
                                 whatsapp: null,
                                 tiktok: null,
                                 sitioWeb: null,
                                 correo: null,
-                                foto: "Edificios/edificio emapa.jpg"
+                                videopresentacion: "https://www.tiktok.com/@natividad.padilla/video/7055339869593177349?is_from_webapp=1&sender_device=pc&web_id=7258840551880852997",
+                                ecommerce: null,
+                                promocion: null,
+                                transporte: null,
+                                foto: "Edificios/Casa de la libertad.jpg"
                             },
+                            // Otros marcadores...
                         ]
                     };
-
+                    
                     // Agrega marcadores a los grupos de capas
                     Object.keys(grupos).forEach(grupo => {
                         marcadores[grupo].forEach(marcador => {
@@ -197,7 +199,21 @@
                                 socialTableContent += `<td><a href="${marcador.correo}" target="_blank"><img src="correo.jpg" alt="Correo"></a></td>`;
                             }
                             socialTableContent += `</tr></table>`;
-
+                            // Genera la nueva tabla de información
+                            var nuevaTablaContent = `<table class="nueva-tabla"><tr>`;
+                            if (marcador.videopresentacion) {
+                                nuevaTablaContent += `<td><a href="${marcador.videopresentacion}" target="_blank"><img src="videopresentacion.png" alt="Videopresentacion"></a></td>`;
+                            }
+                            if (marcador.transporte) {
+                                nuevaTablaContent += `<td><a href="${marcador.transporte}" target="_blank"><img src="transporte.png" alt="Transporte"></a></td>`;
+                            }
+                            if (marcador.ecommerce) {
+                                nuevaTablaContent += `<td><a href="${marcador.ecommerce}" target="_blank"><img src="ecommerce.png" alt="Ecommerce"></a></td>`;
+                            }
+                            if (marcador.promocion) {
+                                nuevaTablaContent += `<td><a href="${marcador.promocion}" target="_blank"><img src="promocion.png" alt="Promoción"></a></td>`;
+                            }
+                            nuevaTablaContent += `</tr></table>`;
                             // Genera el contenido del horario desplegable como botón
                             var horarioDropdownContent = '<div class="horario-dropdown">';
                             Object.keys(marcador.horario).forEach(dia => {
@@ -213,21 +229,20 @@
                                     ${horarioDropdownContent}
                                     <p style="margin: 0;"><strong>Dirección:</strong> ${marcador.direccion}</p>
                                     <p style="margin: 0;"><strong>Origen:</strong> ${marcador.origen}</p>
+                                    ${nuevaTablaContent} <!-- Tabla de información -->
                                     <img src="${marcador.foto}" alt="Foto del marcador" style="width: 100%; max-width: 200px; margin-top: 5px;">
-                                    ${socialTableContent}
-                                    
-                                    <!-- Botón de compartir enlace -->
+                                    ${socialTableContent} <!-- Tabla de redes sociales -->
                                     <button id="compartirEnlaceBtn" onclick="compartirEnlace('${marcador.sigla}', ${marcador.latitud}, ${marcador.longitud})">Compartir Enlace</button>
                                 </div>
                             `;
 
-                            var marcadorLayer = L.marker([marcador.latitud, marcador.longitud], { title: marcador.sigla })
-                                .bindPopup(popupContent);
+                            var marcadorLayer = L.marker([marcador.latitud, marcador.longitud], {
+                                title: marcador.sigla
+                            }).bindPopup(popupContent);
 
                             grupos[grupo].addLayer(marcadorLayer);
                         });
                     });
-
                     // Añade los grupos de capas al mapa
                     Object.keys(grupos).forEach(grupo => {
                         map.addLayer(grupos[grupo]);
@@ -235,16 +250,13 @@
 
                     // Añade el control de capas al mapa
                     L.control.layers(null, grupos, { collapsed: false }).addTo(map);
-
                     // Ajusta el zoom y centra el mapa en la ubicación del usuario
                     map.setView(userLocation, 16);
-
                     // Evento de arrastre del marcador de usuario para actualizar la distancia
                     userMarker.on('drag', function (event) {
                         actualizarDistancias();
                     });
 
-                    // Función para actualizar las distancias
                     function actualizarDistancias() {
                         Object.keys(grupos).forEach(grupo => {
                             grupos[grupo].eachLayer(function (m) {
@@ -256,27 +268,18 @@
 
                 });
             } else {
-                // Si el navegador no soporta geolocalización, establece una ubicación predeterminada
                 map.setView([0, 0], 2);
-                // Agrega capa de OpenStreetMap al mapa
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '© OpenStreetMap contributors'
                 }).addTo(map);
-
-                // Resto del código para agregar marcadores y grupos de capas
-                // ...
             }
         });
 
-        // Función para compartir enlace
         function compartirEnlace(sigla, latitud, longitud) {
             var enlace = window.location.origin + window.location.pathname + '?marker=' + sigla + '&lat=' + latitud + '&lng=' + longitud;
             alert('¡Enlace copiado al portapapeles!\n\n' + enlace);
-            // Puedes personalizar esta función para copiar el enlace al portapapeles o abrir una ventana de compartir, según tus necesidades.
-            // Para copiar al portapapeles, puedes utilizar el API de Clipboard (document.execCommand o Clipboard API) o bibliotecas como Clipboard.js.
         }
 
-        // Función para alternar la visibilidad del horario
         function toggleHorario(element) {
             var horarioDropdown = element.nextElementSibling;
             horarioDropdown.style.display = horarioDropdown.style.display === 'none' ? 'block' : 'none';
