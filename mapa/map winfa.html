@@ -1,62 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <td><button><a href="../index.html">Winfa</a></button></td>
-    <button id="ubicacionActualBtn" onclick="obtenerUbicacionActual()"></button>
-
     <title>Tu Mapa</title>
-    
+
     <style>
         #map {
             height: 700px;
         }
 
-        .nueva-tabla {
+        .nueva-tabla, .social-table {
             width: 100%;
-            margin-top: 0.5px;
+            margin-top: 5px;
             border-collapse: collapse;
         }
 
-        .nueva-tabla td {
-            padding: 0.5px;
+        .nueva-tabla td, .social-table td {
+            padding: 5px;
             border: 1px solid #ddd;
             text-align: center;
         }
 
-        .nueva-tabla img {
+        .nueva-tabla img, .social-table img {
             width: 30px;
             height: auto;
             margin: 0;
         }
 
-        .social-table {
-            width: 100%;
-            margin-top: 0.5px;
-            border-collapse: collapse;
-        }
-
-        .social-table td {
-            padding: 0.5px;
-            border: 1px solid #ddd;
-            text-align: center;
-        }
-
-        .social-table img {
-            width: 30px;
-            height: auto;
-            margin: 0;
-        }
-
-        .horario-dropdown {
+        .horario-dropdown, .compartir-dropdown {
             display: none;
             margin-top: 0;
             margin-bottom: 0;
         }
 
-        .horario-button {
+        .horario-button, .horario-toggle, .compartir-button, .compartir-toggle {
             cursor: pointer;
             background-color: #4CAF50;
             color: white;
@@ -68,41 +47,12 @@
             font-size: 12px;
             margin: 2px 2px;
             transition-duration: 0.4s;
-            cursor: pointer;
             border-radius: 3px;
         }
 
-        .horario-toggle {
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 12px;
-            margin: 2px 2px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-
-        #compartirEnlaceBtn {
-            cursor: pointer;
+        .horario-button, .compartir-button {
             background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 3px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin-top: 10px;
-            border-radius: 5px;
         }
-
-
     </style>
 
     <!-- Agrega Leaflet CSS -->
@@ -113,7 +63,7 @@
 
     <!-- Contenido principal de tu página -->
     <div id="map"></div>
-    
+
     <!-- Agrega Leaflet JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
@@ -130,96 +80,57 @@
                         attribution: '© OpenStreetMap contributors'
                     }).addTo(map);
 
-                    userMarker = L.marker(userLocation, { draggable: true })
-                    .addTo(map)
-                    .bindPopup("Tu ubicación actual")
-                    .openPopup();
+                    userMarker = L.marker(userLocation, {
+                            draggable: true
+                        })
+                        .addTo(map)
+                        .bindPopup("Tu ubicación actual")
+                        .openPopup();
 
-                    // Grupos de capas
                     var grupos = {
                         Agricultura: L.layerGroup(),
                         Manufactura: L.layerGroup(),
                         Servicios: L.layerGroup()
                     };
-                    
-                    // Datos de marcadores (reemplaza estos datos con los tuyos)
+
                     var marcadores = {
                         Agricultura: [],
                         Manufactura: [],
-                        Servicios: [
-                            {
-                                latitud: -19.047577,
-                                longitud: -65.260211,
-                                sigla: "Casa de la Libertad",
-                                nombre: "",
-                                horario: {
-                                    Lunes: "00:00 - 24:00",
-                                    Martes: "00:00 - 24:00",
-                                    Miércoles: "00:00 - 24:00",
-                                    Jueves: "00:00 - 24:00",
-                                    Viernes: "00:00 - 24:00",
-                                    Sabado: "00:00 - 24:00",
-                                    Domingo: "00:00 - 24:00"
-                                },
-                                direccion: "Calle: Plaza 25 de Mayo",
-                                origen: "Sucre - Chuquisaca - Bolivia",
-                                facebook: null,
-                                whatsapp: null,
-                                tiktok: null,
-                                sitioWeb: null,
-                                correo: null,
-                                videopresentacion: "https://vm.tiktok.com/ZM6CKLby8/",
-                                ecommerce: null,
-                                promocion: null,
-                                transporte: null,
-                                foto: "Edificios/Casa de la libertad.jpg"
+                        Servicios: [{
+                            latitud: -19.053839,
+                            longitud: -65.253089,
+                            sigla: "Calle de los gatos",
+                            nombre: "",
+                            horario: {
+                                Lunes: "00:00 - 24:00",
+                                Martes: "00:00 - 24:00",
+                                Miércoles: "00:00 - 24:00",
+                                Jueves: "00:00 - 24:00",
+                                Viernes: "00:00 - 24:00",
+                                Sabado: "00:00 - 24:00",
+                                Domingo: "00:00 - 24:00"
                             },
-                            // Otros marcadores...
-                        ]
+                            direccion: "Calle: Gato Negro",
+                            origen: "Sucre - Chuquisaca - Bolivia",
+                            facebook: null,
+                            whatsapp: null,
+                            tiktok: null,
+                            sitioWeb: null,
+                            correo: null,
+                            videopresentacion: "https://vm.tiktok.com/ZM6QXV1nS/",
+                            ecommerce: null,
+                            promocion: null,
+                            transporte: null,
+                            foto: "Edificios/calle de los gatos.jpg"
+                        }]
+                        // Agrega más marcadores según sea necesario
                     };
-                    
-                    // Agrega marcadores a los grupos de capas
+
                     Object.keys(grupos).forEach(grupo => {
                         marcadores[grupo].forEach(marcador => {
-                            // Genera la tabla de redes sociales según lo que tiene el marcador
-                            var socialTableContent = `<table class="social-table"><tr>`;
-                            if (marcador.facebook) {
-                                socialTableContent += `<td><a href="${marcador.facebook}" target="_blank"><img src="facebook.png" alt="Facebook"></a></td>`;
-                            }
-                            if (marcador.whatsapp) {
-                                socialTableContent += `<td><a href="${marcador.whatsapp}" target="_blank"><img src="whatsapp.png" alt="WhatsApp"></a></td>`;
-                            }
-                            if (marcador.tiktok) {
-                                socialTableContent += `<td><a href="${marcador.tiktok}" target="_blank"><img src="tiktok.png" alt="TikTok"></a></td>`;
-                            }
-                            if (marcador.sitioWeb) {
-                                socialTableContent += `<td><a href="${marcador.sitioWeb}" target="_blank"><img src="pagina.png" alt="Sitio Web"></a></td>`;
-                            }
-                            if (marcador.correo) {
-                                socialTableContent += `<td><a href="${marcador.correo}" target="_blank"><img src="correo.jpg" alt="Correo"></a></td>`;
-                            }
-                            socialTableContent += `</tr></table>`;
-                            // Genera la nueva tabla de información
-                            var nuevaTablaContent = `<table class="nueva-tabla"><tr>`;
-                            if (marcador.videopresentacion) {
-                                nuevaTablaContent += `<td><a href="${marcador.videopresentacion}" target="_blank"><img src="videopresentacion.png" alt="Videopresentacion"></a></td>`;
-                            }
-                            if (marcador.transporte) {
-                                nuevaTablaContent += `<td><a href="${marcador.transporte}" target="_blank"><img src="transporte.png" alt="Transporte"></a></td>`;
-                            }
-                            if (marcador.ecommerce) {
-                                nuevaTablaContent += `<td><a href="${marcador.ecommerce}" target="_blank"><img src="ecommerce.png" alt="Ecommerce"></a></td>`;
-                            }
-                            if (marcador.promocion) {
-                                nuevaTablaContent += `<td><a href="${marcador.promocion}" target="_blank"><img src="promocion.png" alt="Promoción"></a></td>`;
-                            }
-                            nuevaTablaContent += `</tr></table>`;
-                            // Genera el contenido del horario desplegable como botón
-                            var horarioDropdownContent = '<div class="horario-dropdown">';
-                            Object.keys(marcador.horario).forEach(dia => {
-                                horarioDropdownContent += `<button class="horario-button">${dia}: ${marcador.horario[dia]}</button>`;
-                            });
-                            horarioDropdownContent += '</div>';
+                            var socialTableContent = generateSocialTableContent(marcador);
+                            var nuevaTablaContent = generateNuevaTablaContent(marcador);
+                            var horarioDropdownContent = generateHorarioDropdownContent(marcador);
 
                             var popupContent = `
                                 <div style="max-width: 300px;">
@@ -232,7 +143,8 @@
                                     ${nuevaTablaContent} <!-- Tabla de información -->
                                     <img src="${marcador.foto}" alt="Foto del marcador" style="width: 100%; max-width: 200px; margin-top: 5px;">
                                     ${socialTableContent} <!-- Tabla de redes sociales -->
-                                    <button id="compartirEnlaceBtn" onclick="compartirEnlace('${marcador.sigla}', ${marcador.latitud}, ${marcador.longitud})">Compartir Enlace</button>
+                                    <div class="compartir-toggle" onclick="toggleCompartir(this, '${marcador.sigla}', ${marcador.latitud}, ${marcador.longitud})">Compartir Enlace</div>
+                                    <div class="compartir-dropdown" id="compartir-${marcador.sigla}"></div>
                                 </div>
                             `;
 
@@ -243,16 +155,17 @@
                             grupos[grupo].addLayer(marcadorLayer);
                         });
                     });
-                    // Añade los grupos de capas al mapa
+
                     Object.keys(grupos).forEach(grupo => {
                         map.addLayer(grupos[grupo]);
                     });
 
-                    // Añade el control de capas al mapa
-                    L.control.layers(null, grupos, { collapsed: false }).addTo(map);
-                    // Ajusta el zoom y centra el mapa en la ubicación del usuario
+                    L.control.layers(null, grupos, {
+                        collapsed: false
+                    }).addTo(map);
+
                     map.setView(userLocation, 16);
-                    // Evento de arrastre del marcador de usuario para actualizar la distancia
+
                     userMarker.on('drag', function (event) {
                         actualizarDistancias();
                     });
@@ -264,7 +177,55 @@
                                 document.getElementById('distancia-' + m.options.title).innerText = `Distancia: ${distancia.toFixed(2)} metros`;
                             });
                         });
-                    };
+                    }
+
+                    function generateSocialTableContent(marcador) {
+                        var socialTableContent = `<table class="social-table"><tr>`;
+                        if (marcador.facebook) {
+                            socialTableContent += `<td><a href="${marcador.facebook}" target="_blank"><img src="facebook.png" alt="Facebook"></a></td>`;
+                        }
+                        if (marcador.whatsapp) {
+                            socialTableContent += `<td><a href="${marcador.whatsapp}" target="_blank"><img src="whatsapp.png" alt="WhatsApp"></a></td>`;
+                        }
+                        if (marcador.tiktok) {
+                            socialTableContent += `<td><a href="${marcador.tiktok}" target="_blank"><img src="tiktok.png" alt="TikTok"></a></td>`;
+                        }
+                        if (marcador.sitioWeb) {
+                            socialTableContent += `<td><a href="${marcador.sitioWeb}" target="_blank"><img src="pagina.png" alt="Sitio Web"></a></td>`;
+                        }
+                        if (marcador.correo) {
+                            socialTableContent += `<td><a href="${marcador.correo}" target="_blank"><img src="correo.jpg" alt="Correo"></a></td>`;
+                        }
+                        socialTableContent += `</tr></table>`;
+                        return socialTableContent;
+                    }
+
+                    function generateNuevaTablaContent(marcador) {
+                        var nuevaTablaContent = `<table class="nueva-tabla"><tr>`;
+                        if (marcador.videopresentacion) {
+                            nuevaTablaContent += `<td><a href="${marcador.videopresentacion}" target="_blank"><img src="videopresentacion.png" alt="Videopresentacion"></a></td>`;
+                        }
+                        if (marcador.transporte) {
+                            nuevaTablaContent += `<td><a href="${marcador.transporte}" target="_blank"><img src="transporte.png" alt="Transporte"></a></td>`;
+                        }
+                        if (marcador.ecommerce) {
+                            nuevaTablaContent += `<td><a href="${marcador.ecommerce}" target="_blank"><img src="ecommerce.png" alt="Ecommerce"></a></td>`;
+                        }
+                        if (marcador.promocion) {
+                            nuevaTablaContent += `<td><a href="${marcador.promocion}" target="_blank"><img src="promocion.png" alt="Promoción"></a></td>`;
+                        }
+                        nuevaTablaContent += `</tr></table>`;
+                        return nuevaTablaContent;
+                    }
+
+                    function generateHorarioDropdownContent(marcador) {
+                        var horarioDropdownContent = '<div class="horario-dropdown">';
+                        Object.keys(marcador.horario).forEach(dia => {
+                            horarioDropdownContent += `<button class="horario-button">${dia}: ${marcador.horario[dia]}</button>`;
+                        });
+                        horarioDropdownContent += '</div>';
+                        return horarioDropdownContent;
+                    }
 
                 });
             } else {
@@ -275,15 +236,34 @@
             }
         });
 
-        function compartirEnlace(sigla, latitud, longitud) {
-            var enlace = window.location.origin + window.location.pathname + '?marker=' + sigla + '&lat=' + latitud + '&lng=' + longitud;
-            alert('¡Enlace copiado al portapapeles!\n\n' + enlace);
+        function compartirEnRed(red, sigla, latitud, longitud) {
+            var paginaActual = window.location.origin + window.location.pathname;
+            var enlaceMarcador = paginaActual + '?marker=' + sigla + '&lat=' + latitud + '&lng=' + longitud;
+
+            switch (red) {
+                case 'whatsapp':
+                    window.open('https://api.whatsapp.com/send?text=' + encodeURIComponent(enlaceMarcador), '_blank');
+                    break;
+                // Agrega más casos según sea necesario
+                default:
+                    break;
+            }
         }
 
         function toggleHorario(element) {
             var horarioDropdown = element.nextElementSibling;
             horarioDropdown.style.display = horarioDropdown.style.display === 'none' ? 'block' : 'none';
         }
+
+        function toggleCompartir(element, sigla, latitud, longitud) {
+            var compartirDropdown = document.getElementById('compartir-' + sigla);
+            compartirDropdown.innerHTML = `
+                <button class="compartir-button" onclick="compartirEnRed('whatsapp', '${sigla}', ${latitud}, ${longitud})">WhatsApp</button>
+                <!-- Agrega más botones según sea necesario -->
+            `;
+            compartirDropdown.style.display = compartirDropdown.style.display === 'none' ? 'block' : 'none';
+        }
     </script>
 </body>
+
 </html>
