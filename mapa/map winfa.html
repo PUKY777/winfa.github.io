@@ -242,7 +242,7 @@
 
         function compartirEnRed(red, sigla, latitud, longitud) {
             var paginaActual = window.location.origin + window.location.pathname;
-            var enlaceMarcador = paginaActual + '?marker=' + sigla + '&lat=' + latitud + '&lng=' + longitud;
+            var enlace = window.location.origin + window.location.pathname + '?marker=' + encodeURIComponent(sigla) + '&lat=' + encodeURIComponent(latitud) + '&lng=' + encodeURIComponent(longitud);
 
             switch (red) {
                 case 'whatsapp':
