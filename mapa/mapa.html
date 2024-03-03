@@ -53,22 +53,29 @@
     }
 
     .horario-dropdown {
-        display: none;
-        background-color: white; /* Texto blanco */
+        display: grid;
+        grid-template-columns: repeat(1, 1fr); /* Distribuir en 1 columna */
+        gap: 0px; /* Espacio entre botones */
+        background-color: white;
         padding: 5px;
         border-radius: 1px;
     }
 
     .horario-button {
-        display: block;
-        width: 100%;
-        padding: 5px;
-        text-align: left;
-        background-color: white; /* Texto blanco */
-        border: none;
-        cursor: pointer;
-        color: black;
-    }
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 1px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 12px;
+            margin: 1px 1px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 3px;
+        }
 
     .horario-toggle {
         background-color: green; /* Fondo verde */
@@ -77,6 +84,7 @@
         border-radius: 5px;
         cursor: pointer;
         display: inline-block;
+        margin-bottom: 3px; /* Ajusta este valor según sea necesario */
     }
 
     #compartirBtn {
@@ -86,6 +94,10 @@
         padding: 5px 10px;
         cursor: pointer;
         border-radius: 5px;
+    }
+
+    .hidden {
+    display: none;
     }
 </style>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgrRITrhfXPI_-pj4PVvyQ9_7AZn1cpHE&callback=initMap"
@@ -127,7 +139,213 @@
                 promocion: null,
                 transporte: null,
                 foto: "Edificios/CalleDeLosGatos.jpg"
-            }]
+                },{
+                latitud: -19.041202,
+                longitud: -65.265284,
+                sigla: "Fuente del Bicentenario",
+                nombre: "",
+                horario: {
+                    Lunes: "00:00 - 24:00",
+                    Martes: "00:00 - 24:00",
+                    Miércoles: "00:00 - 24:00",
+                    Jueves: "00:00 - 24:00",
+                    Viernes: "00:00 - 24:00",
+                    Sabado: "00:00 - 24:00",
+                    Domingo: "00:00 - 24:00"
+                },
+                direccion: "",
+                origen: "Sucre - Chuquisaca - Bolivia",
+                facebook: null,
+                whatsapp: null,
+                tiktok: null,
+                sitioWeb: null,
+                correo: null,
+                videopresentacion: "https://vm.tiktok.com/ZM6QGTwdV/",
+                ecommerce: null,
+                promocion: null,
+                transporte: null,
+                foto: "Edificios/fuente bicentenrio.jpg"
+                },{
+                latitud: -19.041843,
+                longitud: -65.264247,
+                sigla: "Torre Eiffel",
+                nombre: "",
+                horario: {
+                    Lunes: "00:00 - 24:00",
+                    Martes: "00:00 - 24:00",
+                    Miércoles: "00:00 - 24:00",
+                    Jueves: "00:00 - 24:00",
+                    Viernes: "00:00 - 24:00",
+                    Sabado: "00:00 - 24:00",
+                    Domingo: "00:00 - 24:00"
+                },
+                direccion: "",
+                origen: "Sucre - Chuquisaca - Bolivia",
+                facebook: null,
+                whatsapp: null,
+                tiktok: null,
+                sitioWeb: null,
+                correo: null,
+                videopresentacion: "https://vm.tiktok.com/ZM6Qs22Bq/",
+                ecommerce: null,
+                promocion: null,
+                transporte: null,
+                foto: "Edificios/Torre Eiffel.jpg"
+                },{
+                latitud: -19.042084,
+                longitud: -65.262295,
+                sigla: "Parque Bolívar",
+                nombre: "",
+                horario: {
+                    Lunes: "00:00 - 24:00",
+                    Martes: "00:00 - 24:00",
+                    Miércoles: "00:00 - 24:00",
+                    Jueves: "00:00 - 24:00",
+                    Viernes: "00:00 - 24:00",
+                    Sabado: "00:00 - 24:00",
+                    Domingo: "00:00 - 24:00"
+                    },
+                direccion: "Av. Hernando Siles esq. Pilinco",
+                origen: "Sucre - Chuquisaca - Bolivia",
+                facebook: null,
+                whatsapp: null,
+                tiktok: null,
+                sitioWeb: null,
+                correo: null,
+                videopresentacion: "https://vm.tiktok.com/ZM6Qp3rvd/",
+                ecommerce: null,
+                promocion: null,
+                transporte: null,
+                foto: "Edificios/parque bolívar.png"
+                },{
+                latitud: -19.047893,
+                longitud: -65.259610,
+                sigla: "Plaza 25 de Mayo",
+                nombre: "",
+                horario: {
+                    Lunes: "00:00 - 24:00",
+                    Martes: "00:00 - 24:00",
+                    Miércoles: "00:00 - 24:00",
+                    Jueves: "00:00 - 24:00",
+                    Viernes: "00:00 - 24:00",
+                    Sabado: "00:00 - 24:00",
+                    Domingo: "00:00 - 24:00"
+                },
+                direccion: "Plaza 25 de Mayo",
+                origen: "Sucre - Chuquisaca - Bolivia",
+                facebook: null,
+                whatsapp: null,
+                tiktok: null,
+                sitioWeb: null,
+                correo: null,
+                videopresentacion: "https://vm.tiktok.com/ZM6QtDfF7/",
+                ecommerce: null,
+                promocion: null,
+                transporte: null,
+                foto: "Edificios/plaza 25 de mayo.jpg"
+                },{
+                latitud: -19.047582,
+                longitud: -65.260212,
+                sigla: "Casa de la Libertad",
+                nombre: "",
+                horario: {
+                    Lunes: "00:00 - 24:00",
+                    Martes: "00:00 - 24:00",
+                    Miércoles: "00:00 - 24:00",
+                    Jueves: "00:00 - 24:00",
+                    Viernes: "00:00 - 24:00",
+                    Sabado: "00:00 - 24:00",
+                    Domingo: "00:00 - 24:00"
+                },
+                direccion: "Calle: 25 de Mayo",
+                origen: "Sucre - Chuquisaca - Bolivia",
+                facebook: null,
+                whatsapp: null,
+                tiktok: null,
+                sitioWeb: null,
+                correo: null,
+                videopresentacion: "https://vm.tiktok.com/ZM6CKLby8/",
+                ecommerce: null,
+                promocion: null,
+                transporte: null,
+                foto: "Edificios/Casa de la libertad.jpg"
+                            },{
+                latitud: -19.054309, 
+                longitud: -65.254213,
+                sigla: "Mirador La Recoleta",
+                nombre: "",
+                horario: {
+                    Lunes: "00:00 - 24:00",
+                    Martes: "00:00 - 24:00",
+                    Miércoles: "00:00 - 24:00",
+                    Jueves: "00:00 - 24:00",
+                    Viernes: "00:00 - 24:00",
+                    Sabado: "00:00 - 24:00",
+                    Domingo: "00:00 - 24:00"
+                },
+                direccion: "",
+                origen: "Sucre - Chuquisaca - Bolivia",
+                facebook: null,
+                whatsapp: null,
+                tiktok: null,
+                sitioWeb: null,
+                correo: null,
+                videopresentacion: null,
+                ecommerce: null,
+                promocion: null,
+                transporte: null,
+                foto: "Edificios/recoleta.jpg"
+                },{
+                latitud: -19.027463,
+                longitud: -65.263347,
+                sigla: "Mirador Tintamayu",
+                nombre: "",
+                horario: {
+                    Lunes: "00:00 - 24:00",
+                    Martes: "00:00 - 24:00",
+                    Miércoles: "00:00 - 24:00",
+                    Jueves: "00:00 - 24:00",
+                    Viernes: "00:00 - 24:00",
+                    Sabado: "00:00 - 24:00",
+                    Domingo: "00:00 - 24:00"
+                },
+                direccion: "",
+                origen: "Sucre - Chuquisaca - Bolivia",
+                facebook: null,
+                whatsapp: null,
+                tiktok: null,
+                sitioWeb: null,
+                correo: null,
+                videopresentacion: null,
+                ecommerce: null,
+                promocion: null,
+                transporte: null,
+                foto: "Edificios/Tintamayu.jpg"
+                },{
+                latitud: -19.051713,
+                longitud: -65.260597,
+                sigla: "I.N.E.",
+                nombre: "Instituto Nacional de Estadística",
+                horario: {
+                    Lunes: "08:00 - 12:00/14:00 - 18:00",
+                    Martes: "08:00 - 12:00/14:00 - 18:00",
+                    Miércoles: "08:00 - 12:00/14:00 - 18:00",
+                    Jueves: "08:00 - 12:00/14:00 - 18:00",
+                    Viernes: "08:00 - 12:00/14:00 - 18:00"
+                },
+                direccion: "Calle Bolívar N° 825",
+                origen: "Sucre - Chuquisaca - Bolivia",
+                facebook: "https://www.facebook.com/ineboliviaoficial",
+                whatsapp: "https://wa.me/59168106559",
+                tiktok: "https://www.tiktok.com/@ine_bolivia",
+                sitioWeb: "https://www.ine.gob.bo/",
+                correo: null,
+                videopresentacion: null,
+                ecommerce: null,
+                promocion: null,
+                transporte: null,
+                foto: "Edificios/Edificio INE.jpg"
+                }]
         };
 
         var ubicacionActualMarker;
@@ -149,7 +367,7 @@
                         mapTypeId: 'satellite',
                         streetViewControl: false,
                         fullscreenControl: false,
-                        zoomControl: false,
+                        zoomControl: true,
                         styles: [{
                             "featureType": "poi",
                             "stylers": [{ "visibility": "off" }]
@@ -217,19 +435,27 @@
 
                 var popupContent = `
                     <div style="max-width: 300px;">
-                        <h3 style="margin: 0;">${marcador.sigla}</h3>
-                        <p style="margin: 5px 0 0;">${marcador.nombre}</p>
-                        <div class="horario-toggle" onclick="toggleHorario(this)">Horario</div>
-                        <div class="horario-dropdown">
-                            ${getHorarioDropdownContent(marcador.horario)}
-                        </div>
-                        <p style="margin: 0;"><strong>Dirección:</strong> ${marcador.direccion}</p>
-                        <p style="margin: 0;"><strong>Origen:</strong> ${marcador.origen}</p>
+                    <h3 style="margin: 0;">${marcador.sigla}</h3>
+                    <p style="margin: 5px 0 0;">${marcador.nombre}</p>
+                    <div class="horario-toggle" onclick="toggleHorario(this)">Horario</div>
+                    <div class="horario-dropdown hidden">
+                        <table>
+                            <tr><td>Lunes:</td><td>${marcador.horario.Lunes}</td></tr>
+                            <tr><td>Martes:</td><td>${marcador.horario.Martes}</td></tr>
+                            <tr><td>Miércoles:</td><td>${marcador.horario.Miércoles}</td></tr>
+                            <tr><td>Jueves:</td><td>${marcador.horario.Jueves}</td></tr>
+                            <tr><td>Viernes:</td><td>${marcador.horario.Viernes}</td></tr>
+                            <tr><td>Sábado:</td><td>${marcador.horario.Sábado}</td></tr>
+                            <tr><td>Domingo:</td><td>${marcador.horario.Domingo}</td></tr>
+                        </table>
+                    </div>
+                    <p style="margin: 0;"><strong>Dirección:</strong> ${marcador.direccion}</p>
+                    <p style="margin: 0;"><strong>Origen:</strong> ${marcador.origen}</p>
                         ${getNuevaTablaContent(marcador)}
-                        <img src="${marcador.foto}" alt="Foto del marcador" style="width: 100%; max-width: 200px; margin-top: 5px;">
+                    <img src="${marcador.foto}" alt="Foto del marcador" style="width: 100%; max-width: 200px; margin-top: 5px;">
                         ${getSocialTableContent(marcador)}
-                        <button id="compartirBtn" onclick="compartir('${marcador.sigla}', ${marcador.latitud}, ${marcador.longitud})">Compartir</button>
-                    </div>`;
+                    <button id="compartirBtn" onclick="compartir('${marcador.sigla}', ${marcador.latitud}, ${marcador.longitud})">Compartir</button>
+                </div>`;
 
                 var infoWindow = new google.maps.InfoWindow({
                     content: popupContent
@@ -298,11 +524,7 @@
 
         function toggleHorario(elemento) {
             var dropdown = elemento.nextElementSibling;
-            if (dropdown.style.display === 'none') {
-                dropdown.style.display = 'block';
-            } else {
-                dropdown.style.display = 'none';
-            }
+            dropdown.classList.toggle('hidden'); // Alternar la clase 'hidden'
         }
 
         function compartir(sigla, latitud, longitud) {
@@ -334,3 +556,4 @@
 </body>
 
 </html>
+
