@@ -85,6 +85,7 @@
         }
 
     </style>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgrRITrhfXPI_-pj4PVvyQ9_7AZn1cpHE&callback=initMap" defer></script>
     <script>
         var map;
@@ -484,6 +485,13 @@
                         agregarMarcadores(marcadores[grupo], grupo);
                     });
 
+                    var markerCluster = new MarkerClusterer(map, grupos['Servicios'], {
+                    imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m',
+                    gridSize: 60,
+                    averageCenter: true,
+                    minimumClusterSize: 2
+                    });
+                    
                     var groupFilters = document.createElement('div');
                     groupFilters.id = 'group-filters';
                     Object.keys(grupos).forEach(function (grupo) {
