@@ -29,9 +29,9 @@
 
         #group-filters {
             position: absolute;
-            top: 10px; /* ajusta la posición vertical según sea necesario */
-            left: 10px; /* ajusta la posición horizontal según sea necesario */
-            z-index: 1000; /* asegúrate de que el z-index sea lo suficientemente alto */
+            top: 0.5px;
+            left: 0.5px;
+            z-index: 1;
             background-color: white;
             padding: 8px;
             border-radius: 3px;
@@ -48,8 +48,8 @@
 
         .social-table img,
         .nueva-tabla img {
-            width: 30px;
-            height: 30px;
+            width: 25px;
+            height: 25px;
         }
 
         .horario-dropdown {
@@ -81,12 +81,14 @@
             font-size: 18px;
             background: white;
             padding: 5px;
-            border-radius: 5px;
+            border-radius: 15px;
         }
 
     </style>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgrRITrhfXPI_-pj4PVvyQ9_7AZn1cpHE&callback=initMap" defer></script>
     <script>
+        
         var map;
         var grupos = {
             Agricultura: [],
@@ -474,7 +476,7 @@
                     });
 
                     // Agregar marcador de ubicación actual
-                    ubicacionActualMarker = new google.maps.Marker({
+                    var ubicacionActualMarker = new google.maps.Marker({
                         position: ubicacion,
                         map: map,
                         title: 'Tu ubicación actual'
@@ -490,7 +492,7 @@
                     averageCenter: true,
                     minimumClusterSize: 2
                     });
-                    
+
                     var groupFilters = document.createElement('div');
                     groupFilters.id = 'group-filters';
                     Object.keys(grupos).forEach(function (grupo) {
@@ -502,6 +504,7 @@
                         checkbox.addEventListener('change', function () {
                             toggleMarkers(grupos[grupo], this.checked);
                         });
+
                         var label = document.createElement('label');
                         label.htmlFor = grupo.toLowerCase();
                         label.textContent = grupo;
@@ -511,11 +514,11 @@
                     });
                     document.getElementById('map-container').appendChild(groupFilters);
                 }, function () {
-                    // Error handling when user denies location access
+                    // Error handling cuando el usuario deniega el acceso a la ubicación
                     handleLocationError(true, infoWindow, map.getCenter());
                 });
             } else {
-                // Browser doesn't support Geolocation
+                // El navegador no soporta la geolocalización
                 handleLocationError(false, infoWindow, map.getCenter());
             }
         }
@@ -640,6 +643,7 @@
                 'Error: Su navegador no admite la geolocalización.');
             infoWindow.open(map);
         }
+
     </script>
 </head>
 
